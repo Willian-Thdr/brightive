@@ -35,13 +35,17 @@ public class CameraSensor
             );
         
             double brightness = Cv2.Mean(gray).Val0;
-        
-            if (timer.ElapsedMilliseconds >= 5000)
+
+            if (brightness > 125)
             {
-                
+                ChangeTheme.change(false);
+            } 
+            else if (brightness < 120)
+            {
+                ChangeTheme.change(true);    
             }
-        
-            Thread.Sleep(50);
+
+            Thread.Sleep(1000);
         }
     }
 }
