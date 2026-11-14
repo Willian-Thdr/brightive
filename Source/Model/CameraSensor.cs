@@ -35,12 +35,13 @@ public class CameraSensor
             );
         
             double brightness = Cv2.Mean(gray).Val0;
+            Console.WriteLine($"Brilho local: {brightness:F22}/255");
 
-            if (brightness > 125)
+            if (brightness > 165)
             {
                 ChangeTheme.change(false);
             } 
-            else if (brightness < 120)
+            else if (brightness < 100)
             {
                 ChangeTheme.change(true);    
             }
