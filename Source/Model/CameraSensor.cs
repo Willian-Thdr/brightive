@@ -5,6 +5,8 @@ public class CameraSensor
 {
     public void use_camera()
     {
+        List<int> list = get_config();
+
         using var camera = new VideoCapture(0, VideoCaptureAPIs.MSMF);
         
         if (!camera.IsOpened())
@@ -12,8 +14,6 @@ public class CameraSensor
             Console.WriteLine("Open camera it's not possible.");
             return;
         }
-        
-        Console.WriteLine("Camera initializing.");
         
         using var frame = new Mat();
         using var gray = new Mat();
@@ -35,18 +35,46 @@ public class CameraSensor
             );
         
             double brightness = Cv2.Mean(gray).Val0;
-            Console.WriteLine($"Brilho local: {brightness:F22}/255");
 
-            if (brightness > 165)
+            if (brightness > list[1])
             {
                 ChangeTheme.change(false);
             } 
-            else if (brightness < 100)
+            else if (brightness < list[0])
             {
                 ChangeTheme.change(true);    
             }
 
             Thread.Sleep(1000);
         }
+    }
+
+    private static List<int> get_config()
+    {
+        string way = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        string config_way = Path.Combine(way, "Brightive", "config");
+        string file = Path.Combine(config_way, "config.cfg");
+
+        string[] content = File.ReadAllLines(file);
+
+        List<int> list = new List<int>();
+
+        foreach(string lines in content)
+        {
+            string line = lines.Trim().Trim(';').Trim(']');
+
+            if (line.StartsWith("min_bright"))
+            {
+                int min_bright = int.Parse(lines.Substring(11).Trim());
+                list.Add(min_bright);
+            } 
+            else if (line.StartsWith("max_bright"))
+            {
+                int max_bright = int.Parse(lines.Substring(11).Trim());
+                list.Add(max_bright);
+            }
+        }
+
+        return list;
     }
 }
