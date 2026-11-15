@@ -2,4 +2,5 @@
 
 ## Change
 
-- Wallpaper change added.
+- Wallpaper change added;
+- Wallpaper settings.
