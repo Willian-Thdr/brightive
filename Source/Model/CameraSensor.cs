@@ -1,5 +1,6 @@
 using OpenCvSharp;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 public class CameraSensor
 {
@@ -42,10 +43,10 @@ public class CameraSensor
             } 
             else if (brightness < list[0])
             {
-                ChangeTheme.change(true);    
+                ChangeTheme.change(true);
             }
 
-            Thread.Sleep(1000);
+            Thread.Sleep(100);
         }
     }
 

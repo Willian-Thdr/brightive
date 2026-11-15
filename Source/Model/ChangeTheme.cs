@@ -1,6 +1,7 @@
-using System;
+using System.Timers;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
+using Timer = System.Timers.Timer;
 
 public class ChangeTheme
 {
@@ -18,7 +19,7 @@ public class ChangeTheme
     );
 
     public static void change(bool mode)
-    {
+    {    
         int value = mode ? 0 : 1;
 
         using (RegistryKey key = Registry.CurrentUser.OpenSubKey(RegistryPath, writable: true) 
