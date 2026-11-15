@@ -1,4 +1,4 @@
-# Brightive v1.0
+# Brightive v1.1
 
 ## About
 
