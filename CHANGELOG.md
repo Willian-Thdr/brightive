@@ -1,4 +1,4 @@
-# rigtive v1.1
+# Rightive v1.1
 
 ## Change
 
