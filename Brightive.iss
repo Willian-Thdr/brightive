@@ -43,6 +43,7 @@ SolidCompression=yes
 WizardStyle=modern dynamic
 SetupIconFile=E:\Projetos\brightive\Assets\Brightive.ico
 LicenseFile=E:\Projetos\brightive\LICENSE
+InfoBeforeFile=E:\Projetos\brightive\CHANGELOG.md
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
