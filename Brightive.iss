@@ -34,7 +34,7 @@ ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 ChangesAssociations=yes
 DisableProgramGroupPage=yes
-InfoBeforeFile=E:\Projetos\brightive\README.md
+InfoAfterFile=E:\Projetos\brightive\README.md
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
 ;PrivilegesRequired=lowest
 OutputDir=E:\Output projetos compilados\Brightive
