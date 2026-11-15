@@ -41,6 +41,7 @@ OutputDir=E:\Output projetos compilados\Brightive
 OutputBaseFilename=brightive setup
 SolidCompression=yes
 WizardStyle=modern dynamic
+SetupIconFile=E:\Projetos\brightive\Assets\Brightive.ico
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

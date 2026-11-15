@@ -10,6 +10,7 @@
     <SelfContained>true</SelfContained>
     <RuntimeIndentier>win-x64</RuntimeIndentier>
     <DebugType>embedded</DebugType>
+    <ApplicationIcon>./Assets/Brightive.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
