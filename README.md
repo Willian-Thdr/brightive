@@ -6,6 +6,8 @@ This software allows you to customize your desktop theme. Whether your environme
 
 ## Details
 
+![demo](./Assets/demonstração.gif)
+
 The program creates a folder in your AppData/Roaming directory. Inside this folder, there is a configuration file where you can adjust the brightness levels, including the minimum and maximum values.
 
 If you set high values, your desktop will remain bright most of the time. However, if you set low values, your desktop will remain dark.
