@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 
 public class CameraSensor
 {
-    public void use_camera()
+    public async Task use_camera()
     {
-        List<int> list = get_config();
+        List<int> list = await Get_config();
 
         using var camera = new VideoCapture(0, VideoCaptureAPIs.MSMF);
         
@@ -50,7 +50,7 @@ public class CameraSensor
         }
     }
 
-    private static List<int> get_config()
+    public static async Task<List<int>> Get_config()
     {
         string way = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         string config_way = Path.Combine(way, "Brightive", "config");
@@ -62,7 +62,7 @@ public class CameraSensor
 
         foreach(string lines in content)
         {
-            string line = lines.Trim().Trim(';').Trim(']');
+            string line = lines.Trim().Trim(':').Trim(']');
 
             if (line.StartsWith("min_bright"))
             {
@@ -73,6 +73,15 @@ public class CameraSensor
             {
                 int max_bright = int.Parse(lines.Substring(11).Trim());
                 list.Add(max_bright);
+            }
+            else if (line.StartsWith("wallpaper_time"))
+            {
+                int time = int.Parse(lines.Substring(31).Trim());
+                list.Add(time);
+            }
+            else
+            {
+                continue;
             }
         }
 

@@ -31,7 +31,7 @@ public class main
         bool result = SystemParametersInfo(SPI_SETDESKTOPWALLPAPER, 0, path_light, SPIF_UPDATEINiFILE | SPIF_SENDCHANGE);
     }
 
-    private static Timer aTimer = new Timer(60000);
+
     private static Timer eTimer = new Timer(100);
     // private const int SW_HIDE = 0;
 
@@ -43,12 +43,15 @@ public class main
         Unknown,
     }
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         // var handle = GetConsoleWindow();
         // ShowWindow(handle, SW_HIDE);
         create_config();
 
+        List<int> milliseconds = await CameraSensor.Get_config();
+        Timer aTimer = new Timer(milliseconds[2]);
+        
         aTimer.Elapsed += OnTimedEvent;
         aTimer.AutoReset = true;
         aTimer.Enabled = true;
@@ -85,8 +88,11 @@ public class main
             try
             {
                 string content = """
-                min_bright:120
-                max_bright:160
+                !! NOTE: 1 second is equals to 1000 milliseconds !!
+                
+                min_bright: 120
+                max_bright: 160
+                wallpaper_time (milliseconds): 60000
                 """;
                 
                 File.WriteAllText(file_config, content);
