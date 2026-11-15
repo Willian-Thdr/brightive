@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Timers;
 using Microsoft.Win32;
 using Timer = System.Timers.Timer;
@@ -8,11 +7,11 @@ public class main
 {
     // DLL importadas
 
-    // [DllImport("kernel32.dll")]
-    // private static extern IntPtr GetConsoleWindow();
+    [DllImport("kernel32.dll")]
+    private static extern IntPtr GetConsoleWindow();
 
-    // [DllImport("user32.dll")]
-    // private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+    [DllImport("user32.dll")]
+    private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
     private static extern bool SystemParametersInfo(
@@ -31,11 +30,10 @@ public class main
         bool result = SystemParametersInfo(SPI_SETDESKTOPWALLPAPER, 0, path_light, SPIF_UPDATEINiFILE | SPIF_SENDCHANGE);
     }
 
-
-    private static Timer eTimer = new Timer(100);
-    // private const int SW_HIDE = 0;
-
     // Métodos e classes
+
+    private const int SW_HIDE = 0;
+
     public enum win_theme
     {
         Light, 
@@ -43,25 +41,33 @@ public class main
         Unknown,
     }
 
-    public static async Task Main(string[] args)
+    public static void Main(string[] args)
     {
-        // var handle = GetConsoleWindow();
-        // ShowWindow(handle, SW_HIDE);
+        var handle = GetConsoleWindow();
+        ShowWindow(handle, SW_HIDE);
+
         create_config();
 
-        List<int> milliseconds = await CameraSensor.Get_config();
-        Timer aTimer = new Timer(milliseconds[2]);
+        List<int> milliseconds = CameraSensor.Get_config();
+
+        if (milliseconds[2] != 0)
+        {
+            Timer aTimer = new Timer(milliseconds[2]);
+            Timer eTimer = new Timer(100);
+            
+            aTimer.Elapsed += OnTimedEvent;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
+    
+    
+            eTimer.Elapsed += alterWallpaperEvent;
+            eTimer.AutoReset = true;
+            eTimer.Enabled = true;
+        }
         
-        aTimer.Elapsed += OnTimedEvent;
-        aTimer.AutoReset = true;
-        aTimer.Enabled = true;
-
-        eTimer.Elapsed += alterWallpaperEvent;
-        eTimer.AutoReset = true;
-        eTimer.Enabled = true;
-
         CameraSensor cam_sen = new CameraSensor();
         cam_sen.use_camera();
+        
     }
 
     private static void create_config()
@@ -89,7 +95,7 @@ public class main
             {
                 string content = """
                 !! NOTE: 1 second is equals to 1000 milliseconds !!
-                
+
                 min_bright: 120
                 max_bright: 160
                 wallpaper_time (milliseconds): 60000

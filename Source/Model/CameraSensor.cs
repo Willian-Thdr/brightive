@@ -6,7 +6,7 @@ public class CameraSensor
 {
     public async Task use_camera()
     {
-        List<int> list = await Get_config();
+        List<int> list = Get_config();
 
         using var camera = new VideoCapture(0, VideoCaptureAPIs.MSMF);
         
@@ -50,7 +50,7 @@ public class CameraSensor
         }
     }
 
-    public static async Task<List<int>> Get_config()
+    public static List<int> Get_config()
     {
         string way = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         string config_way = Path.Combine(way, "Brightive", "config");
