@@ -2,5 +2,4 @@
 
 ## Change
 
-- Wallpaper change added;
-- Wallpaper settings.
+- Explorer window glitch fixed".
