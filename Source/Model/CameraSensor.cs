@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 
 public class CameraSensor
 {
+    private static List<int> list = Get_config();
     public async Task use_camera()
     {
-        List<int> list = Get_config();
 
         using var camera = new VideoCapture(0, VideoCaptureAPIs.MSMF);
         
